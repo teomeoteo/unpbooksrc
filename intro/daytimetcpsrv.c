@@ -8,6 +8,7 @@ main(int argc, char **argv)
 	struct sockaddr_in	servaddr;
 	char				buff[MAXLINE];
 	time_t				ticks;
+    int numberWrites = 0;
 
 	listenfd = Socket(AF_INET, SOCK_STREAM, 0);
 
@@ -27,8 +28,9 @@ main(int argc, char **argv)
         snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&ticks));
         for (size_t i = 0; i < strlen(buff); i++) {
             Write(connfd, buff, strlen(buff));
+           //  numberWrites++;
         }
-
+        // printf("Number of Writes: %d", numberWrites);
 		Close(connfd);
 	}
 }
